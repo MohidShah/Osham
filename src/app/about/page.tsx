@@ -17,12 +17,12 @@ export default function AboutPage() {
       />
       <div className="container mx-auto px-4 py-16 sm:px-6 lg:py-24">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
-            <div className="relative h-[500px] w-full">
+            <div className="relative h-[500px] w-full order-last lg:order-first group overflow-hidden rounded-xl">
                  <Image
-                    src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=800&h=600&fit=crop"
+                    src="/About.png?q=80&w=800&h=600&fit=crop"
                     alt="Team of medical billing professionals in a meeting"
                     fill
-                    className="rounded-lg object-cover shadow-lg"
+                    className="rounded-xl shadow-lg object-covertransition-transform duration-500 group-hover:scale-110"
                     data-ai-hint="medical professionals discussion"
                 />
             </div>

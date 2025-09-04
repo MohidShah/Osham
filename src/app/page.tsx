@@ -1,22 +1,24 @@
+'use client';
 import React from 'react';
+import { motion } from "framer-motion";
+import { useInView } from 'react-intersection-observer';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import Link from 'next/link';
 import { HOW_IT_WORKS, SERVICES, TESTIMONIALS, WHY_CHOOSE_US_ITEMS, PROBLEMS_WE_SOLVE } from '@/lib/constants';
 import { ArrowRight, Star, ChevronRight, Stethoscope, HeartPulse, DollarSign, FileScan, ReceiptText } from 'lucide-react';
-import type { Metadata } from 'next';
 import Image from 'next/image';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { TypewriterEffect } from '@/components/ui/typewriter-effect';
 
-export const metadata: Metadata = {
-  title: 'Osham: Medical Billing',
-  description:
-    'Osham is your expert partner for medical billing, coding, and RCM solutions. We offer HIPAA-compliant services to maximize your revenue and streamline operations.',
-    icons: {
-    icon: "/favicon.ico",  // ✅ looks in /public automatically
-  },
-};
+function AnimatedTypewriter({ text }: { text: string }) {
+  const { ref, inView } = useInView({ threshold: 0.5, triggerOnce: false });
+  return (
+    <h1 ref={ref} className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl text-gradient">
+      {inView && <TypewriterEffect text={text} />}
+    </h1>
+  );
+}
 
 export default function Home() {
   const featuredServices = [
@@ -33,17 +35,15 @@ export default function Home() {
          <HeartPulse className="absolute -right-16 bottom-0 h-72 w-72 text-primary/20 opacity-60 animate-pulse-subtle" />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl">
-              <TypewriterEffect text="TURNING DENIALS INTO DOLLARS" />
-            </h1>
+           <AnimatedTypewriter text="TURNING DENIALS INTO DOLLARS" />
             <p className="mt-6 max-w-3xl mx-auto text-lg text-muted-foreground">
               Osham provides comprehensive medical billing, coding, and RCM solutions designed to increase revenue and reduce administrative burdens.
             </p>
              <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Button asChild size="lg">
+                <Button asChild size="lg" className="w-full sm:w-auto">
                     <Link href="/contact">Request a Demo</Link>
                 </Button>
-                <Button asChild size="lg" variant="outline">
+                <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
                     <Link href="#how-it-works">See How It Works</Link>
                 </Button>
             </div>
@@ -192,12 +192,12 @@ export default function Home() {
       <section id="why-us" className="py-16 md:py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
-            <div className="relative h-96 w-full lg:h-[550px]">
+            <div className="relative h-96 w-full lg:h-[550px] order-last lg:order-first group overflow-hidden rounded-xl">
               <Image
-                src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=800&h=600&fit=crop"
+                src="/Why.jpg?q=80&w=800&h=600&fit=crop"
                 alt="Team of medical billing professionals in a meeting"
                 fill
-                className="rounded-lg object-cover shadow-xl"
+                className="rounded-xl shadow-lg object-covertransition-transform duration-500 group-hover:scale-110"
                 data-ai-hint="medical professionals discussion"
               />
             </div>
@@ -233,7 +233,14 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-16 md:py-20 bg-muted">
+      <motion.section
+        id="testimonials"
+        className="py-16 md:py-20 bg-muted"
+        initial={{ opacity: 0, y: 80 }} // start hidden & pushed down
+        whileInView={{ opacity: 1, y: 0 }} // fade up into place
+        viewport={{ once: false, amount: 0.2 }} // trigger when 20% visible
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
@@ -243,42 +250,52 @@ export default function Home() {
               Discover why healthcare providers trust Osham to manage their revenue cycle.
             </p>
           </div>
+
           <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {TESTIMONIALS.slice(0, 3).map((testimonial, index) => (
-              <Card
+              <motion.div
                 key={index}
-                className="flex flex-col rounded-lg border bg-card p-8 text-left shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+                className="h-full"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
               >
-                <div className="mb-4 flex items-center">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <p className="italic text-muted-foreground">“{testimonial.quote}”</p>
-                <div className="mt-6 flex items-center gap-x-4">
-                  <Avatar className="h-14 w-14">
-                    <AvatarImage
-                      src={testimonial.avatar}
-                      alt={testimonial.name}
-                      data-ai-hint="professional headshot"
-                    />
-                    <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <div className="font-semibold text-foreground">{testimonial.name}</div>
-                    <div className="text-sm text-muted-foreground">{testimonial.title}</div>
+                <Card className="h-full flex flex-col rounded-lg border bg-card p-8 text-left shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+                  <div className="mb-4 flex items-center">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                    ))}
                   </div>
-                </div>
-              </Card>
+                  <p className="italic text-muted-foreground flex-grow">“{testimonial.quote}”</p>
+                  <div className="mt-6 flex items-center gap-x-4">
+                    <Avatar className="h-14 w-14">
+                      <AvatarImage
+                        src={testimonial.avatar}
+                        alt={testimonial.name}
+                        data-ai-hint="professional headshot"
+                      />
+                      <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <div className="font-semibold text-foreground">{testimonial.name}</div>
+                      <div className="text-sm text-muted-foreground">{testimonial.title}</div>
+                    </div>
+                  </div>
+                </Card>
+              </motion.div>
             ))}
           </div>
+
           <div className="mt-12 text-center">
             <Button asChild size="lg" variant="outline">
               <Link href="/testimonials">Read More Testimonials</Link>
             </Button>
           </div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }
+
+  

@@ -7,25 +7,14 @@
 
 import { ai } from '@/ai/genkit';
 import { COMPANY_EMAIL } from '@/lib/constants';
-import { ContactFormInputSchema, type ContactFormInput, ContactFormOutputSchema, type ContactFormOutput } from '@/ai/schemas/contact-schema';
+import {
+  ContactFormInputSchema,
+  type ContactFormInput,
+  ContactFormOutputSchema,
+  type ContactFormOutput,
+} from '@/ai/schemas/contact-schema';
 
-
-const contactPrompt = ai.definePrompt({
-    name: 'contactPrompt',
-    input: { schema: ContactFormInputSchema },
-    prompt: `A user has submitted the contact form on your website. Here are their details:
-
-    Name: {{{name}}}
-    Email: {{{email}}}
-    {{#if phone}}
-    Phone: {{{phone}}}
-    {{/if}}
-    Message:
-    {{{message}}}
-
-    This message has been sent to ${COMPANY_EMAIL}. Please respond to them at your earliest convenience.`,
-});
-
+import nodemailer from 'nodemailer';
 
 const sendContactEmailFlow = ai.defineFlow(
   {
@@ -36,20 +25,54 @@ const sendContactEmailFlow = ai.defineFlow(
   async (input) => {
     console.log(`New contact form submission from ${input.name} (${input.email})`);
 
-    // In a real application, you would integrate an email sending service here.
-    // For this example, we'll simulate a successful submission.
-    
-    // You can optionally generate a summary or response using an LLM
-    // const { output } = await contactPrompt(input);
-    // console.log('LLM Output:', output);
+    // Setup transporter with cPanel SMTP
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT) || 465,
+      secure: Number(process.env.SMTP_PORT) === 465, // true for SSL, false for TLS
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
 
-    return {
-      success: true,
-      message: 'Thank you for your message! We will get back to you shortly.',
+    const mailOptions = {
+      from: `"${input.name}" <${process.env.EMAIL_USER}>`, // must be your domain email
+      to: COMPANY_EMAIL, // where you receive messages
+      replyTo: input.email, // reply goes to sender
+      subject: 'New Contact Form Submission from your Website',
+      text: `You have received a new message from your website contact form.\n\n
+      Name: ${input.name}\n
+      Email: ${input.email}\n
+      Phone: ${input.phone || 'Not provided'}\n
+      Message: ${input.message}`,
+      html: `
+        <h2>New Contact Form Submission</h2>
+        <p><strong>Name:</strong> ${input.name}</p>
+        <p><strong>Email:</strong> <a href="mailto:${input.email}">${input.email}</a></p>
+        <p><strong>Phone:</strong> ${input.phone || 'Not provided'}</p>
+        <hr>
+        <h3>Message:</h3>
+        <p>${input.message.replace(/\n/g, '<br>')}</p>
+      `,
     };
+
+    try {
+      await transporter.sendMail(mailOptions);
+      console.log('Email sent successfully ✅');
+      return {
+        success: true,
+        message: 'Thank you for your message! We will get back to you shortly.',
+      };
+    } catch (error) {
+      console.error('Error sending email:', error);
+      return {
+        success: false,
+        message: 'Sorry, there was an issue sending your message. Please try again later.',
+      };
+    }
   }
 );
-
 
 export async function sendContactForm(input: ContactFormInput): Promise<ContactFormOutput> {
   return await sendContactEmailFlow(input);

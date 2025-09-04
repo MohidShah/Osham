@@ -90,7 +90,7 @@ export const SERVICES: {
     title: 'Medical Billing',
     description: 'Our core service involves end-to-end management of the billing cycle. From charge entry and submission to payment posting and follow-up, we handle every detail to ensure you receive maximum reimbursement.',
     features: ['Accurate charge capture', 'Clean claim submission', 'Proactive A/R follow-up', 'Detailed reporting'],
-    imageUrl: 'https://images.unsplash.com/photo-1554734867-bf3c00a49371?q=80&w=600&h=400&fit=crop',
+    imageUrl: '/MB.jpg',
     hint: 'person calculating finances'
   },
   {
@@ -98,7 +98,7 @@ export const SERVICES: {
     title: 'Medical Coding',
     description: 'Our certified coders ensure that every service is coded accurately according to the latest guidelines (ICD-10, CPT, HCPCS), which is critical for compliance and preventing claim denials.',
     features: ['Certified professional coders', 'Regular coding audits', 'Compliance with regulations', 'Reduced denial rates'],
-    imageUrl: 'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?q=80&w=600&h=400&fit=crop',
+    imageUrl: '/MC.jpg',
     hint: 'person writing code'
   },
   {
@@ -106,7 +106,7 @@ export const SERVICES: {
     title: 'Revenue Cycle Management',
     description: 'We provide a holistic approach to managing your entire revenue cycle, from patient pre-authorization and eligibility verification to the final zero-balance account, optimizing every step for financial success.',
     features: ['Full cycle overview', 'Patient eligibility verification', 'Performance analytics', 'Improved cash flow'],
-    imageUrl: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=600&h=400&fit=crop',
+    imageUrl: '/RCM.jpg',
     hint: 'business analytics chart'
   },
   {
@@ -114,7 +114,7 @@ export const SERVICES: {
     title: 'Claim Denial Management',
     description: "Don't let denials diminish your revenue. Our dedicated team investigates every denied claim, identifies the root cause, manages the appeals process, and implements corrective actions to prevent future denials.",
     features: ['Root cause analysis', 'Timely appeal submission', 'Denial prevention strategies', 'Recovery of lost revenue'],
-    imageUrl: 'https://images.unsplash.com/photo-1556740758-90de374c12ad?q=80&w=600&h=400&fit=crop',
+    imageUrl: '/CDM.jpeg?',
     hint: 'person reviewing documents'
   },
   {
@@ -130,7 +130,7 @@ export const SERVICES: {
     title: 'Electronic Health Records',
     description: 'We help you streamline your clinical workflows with fully integrated Electronic Health Records (EHR) systems. Enhance patient care, improve documentation, and ensure seamless data flow.',
     features: ['EHR system implementation', 'Data migration and integration', 'Staff training and support', 'HIPAA-compliant data management'],
-    imageUrl: 'https://images.unsplash.com/photo-1691934286085-c88039d93dae?q=80&w=600&h=400&fit=crop',
+    imageUrl: '/EHR.jpg',
     hint: 'doctor using tablet'
   },
 ];

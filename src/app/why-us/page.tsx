@@ -20,13 +20,13 @@ export default function WhyChooseUsPage() {
       />
       <div className="container mx-auto px-4 py-16 sm:px-6 lg:py-24">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
-            <div className="relative order-last lg:order-first">
+            <div className="relative order-last lg:order-first group overflow-hidden rounded-xl">
                  <Image 
                     src="https://images.unsplash.com/photo-1576670160060-c4e874631c5a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxNHx8bWVkaWNhbCUyMHByb2Zlc3Npb25hbHN8ZW58MHx8fHwxNzU1NzkwNTg0fDA&ixlib=rb-4.1.0&q=80&w=1080" 
                     alt="A team of smiling, diverse medical professionals"
                     width={600}
                     height={700}
-                    className="rounded-xl shadow-lg object-cover"
+                    className="rounded-xl shadow-lg object-covertransition-transform duration-500 group-hover:scale-110"
                     data-ai-hint="medical professionals"
                     />
             </div>
