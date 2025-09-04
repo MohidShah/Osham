@@ -194,29 +194,86 @@ export const TESTIMONIALS = [
     name: 'Dr. David Chen, MD',
     title: 'Orthopedic Surgeon',
     quote:
-      'The best decision I made for my practice. The financial reporting is clear and insightful, and I\'ve been able to focus entirely on my patients without worrying about billing complexities.',
+      "The best decision I made for my practice. The financial reporting is clear and insightful, and I've been able to focus entirely on my patients without worrying about billing complexities.",
     avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=100&h=100&fit=crop',
   },
    {
     name: 'Maria Rodriguez, Office Manager',
     title: 'Family Medicine Clinic',
     quote:
-      'The credentialing process was a nightmare before we found Osham. They handled everything seamlessly, and our new providers were able to see patients and get paid without delay. Highly recommended!',
+      "The credentialing process was a nightmare before we found Osham. They handled everything seamlessly, and our new providers were able to see patients and get paid without delay. Highly recommended!",
     avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=100&h=100&fit=crop',
   },
    {
     name: 'Johnathan Lee, CFO',
     title: 'Regional Hospital Network',
     quote:
-      'Partnering with Osham for denial management has been a game-changer. They\'ve recovered significant revenue for us and provided the data we needed to prevent future denials. Their expertise is unmatched.',
+      "Partnering with Osham for denial management has been a game-changer. They've recovered significant revenue for us and provided the data we needed to prevent future denials. Their expertise is unmatched.",
     avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=100&h=100&fit=crop',
   },
    {
     name: 'Dr. Emily Carter',
     title: 'Pediatric Practice',
     quote:
-      'As a small practice, we don\'t have the resources for a full-time billing department. Osham provides top-tier service at a fraction of the cost. Our revenue has never been healthier.',
+      "As a small practice, we don't have the resources for a full-time billing department. Osham provides top-tier service at a fraction of the cost. Our revenue has never been healthier.",
     avatar: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=100&h=100&fit=crop',
+  },
+];
+
+// src/lib/constants.ts
+
+export const BLOG_POSTS = [
+  {
+    slug: 'hidden-heartbeat-of-healthcare',
+    title: 'The Hidden Heartbeat of Healthcare: Why Medical Billing & Coding Are the Lifelines of Financial Stability',
+    description:
+      'Behind every diagnosis and treatment lies a quieter, but equally critical story: the meticulous world of medical billing and coding. This isn’t just paperwork. It’s the financial heartbeat of modern healthcare.',
+    author: 'The Osham Team',
+    date: 'September 04, 2025',
+    content: `
+      <p>Healthcare often brings to mind images of white coats, stethoscopes, and heroic moments at the bedside. Yet, behind every diagnosis and treatment lies a quieter, less glamorous-but equally critical-story: the meticulous world of medical billing and coding.</p>
+      <p>This isn’t just paperwork. It’s the financial heartbeat of modern healthcare. And like the heartbeat, you rarely notice it until something goes wrong.</p>
+      <hr class="my-8 border-dashed" />
+      <h3 class="text-2xl font-bold tracking-tight text-primary sm:text-3xl text-gradient mb-4">Beyond Numbers: The Language of Medicine</h3>
+      <p>Medical coding transforms complex clinical encounters into standardized language. Each ICD-10 code, CPT entry, or HCPCS notation is not just an alphanumeric string-it’s a bridge between care delivery and financial sustainability.</p>
+    `,
+  },
+  {
+    slug: 'future-of-ai-in-billing',
+    title: 'The Future of AI in Medical Billing: Efficiency Without Compromise',
+    description:
+      'Artificial Intelligence is reshaping healthcare administration. But how far can automation go without losing the human touch?',
+    author: 'Dr. Sara Malik',
+    date: 'August 15, 2025',
+    content: `
+      <p>AI is no longer a buzzword-it’s entering the core of healthcare operations. From automated claims processing to predictive denial management, intelligent systems are cutting down manual errors and saving millions for practices worldwide.</p>
+      <p>But technology is not without challenges. The future lies in finding balance-using AI for speed and accuracy while keeping human oversight to protect patient trust and compliance.</p>
+      <hr class="my-8 border-dashed" />
+      <h3 class="text-2xl font-bold tracking-tight text-primary sm:text-3xl text-gradient mb-4">Where AI Shines</h3>
+      <p>Automation in coding, smart claim scrubbing, and real-time eligibility checks are already improving reimbursement cycles. Clinics that adopt these tools early are gaining a strong competitive edge.</p>
+    `,
+  },
+  {
+    slug: 'top-5-revenue-mistakes',
+    title: 'Top 5 Revenue Mistakes Clinics Make-and How to Avoid Them',
+    description:
+      'Even successful practices lose money due to overlooked revenue cycle mistakes. Here are the most common pitfalls and practical fixes.',
+    author: 'The Osham Team',
+    date: 'July 30, 2025',
+    content: `
+      <p>Running a clinic is about more than patient care-it’s also about keeping your financial engine healthy. Yet many practices unknowingly leak revenue every day.</p>
+      <p>From coding errors to delayed claim submissions, small oversights compound into major financial stress.</p>
+      <hr class="my-8 border-dashed" />
+      <h3 class="text-2xl font-bold tracking-tight text-primary sm:text-3xl text-gradient mb-4">Common Mistakes</h3>
+      <ul>
+        <li>Not verifying patient insurance eligibility before visits.</li>
+        <li>Submitting incomplete or inaccurate documentation.</li>
+        <li>Ignoring denial management workflows.</li>
+        <li>Lack of staff training in new billing regulations.</li>
+        <li>Delays in claim submission beyond payer deadlines.</li>
+      </ul>
+      <p>Fixing these can boost collections significantly, often without adding new patients.</p>
+    `,
   },
 ];
 
